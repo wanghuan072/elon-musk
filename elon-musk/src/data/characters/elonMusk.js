@@ -203,10 +203,22 @@ export const elonMuskData = {
       image: "/images/products/ElonMusk/product-29.webp"
     },
     {
+      id: 61,
+      name: "Tesla Model Y",
+      price: 60000,
+      image: "/images/products/ElonMusk/product-50.webp"
+    },
+    {
       id: 23,
       name: "Diamond Watch (ROLEX Daytona)",
       price: 65000,
       image: "/images/products/ElonMusk/product-30.webp"
+    },
+    {
+      id: 62,
+      name: "Tesla Cybertruck",
+      price: 100000,
+      image: "/images/products/ElonMusk/product-51.webp"
     },
     {
       id: 58,
@@ -311,83 +323,37 @@ export const elonMuskData = {
       image: "/images/products/ElonMusk/product-47.webp"
     },
     {
+      id: 61,
+      name: "SpaceX",
+      price: 50000000,
+      image: "/images/products/ElonMusk/product-49.webp"
+    },
+    {
       id: 25,
       name: "F16",
       price: 60000000,
       image: "/images/products/ElonMusk/product-48.webp"
     },
     {
-      id: 12,
-      name: "Apache attack helicopter",
-      price: 65000000,
-      image: "/images/products/ElonMusk/product-49.webp"
-    },
-    {
-      id: 55,
-      name: "Private Jet",
-      price: 80000000,
-      image: "/images/products/ElonMusk/product-50.webp"
-    },
-    {
-      id: 26,
-      name: "F22",
-      price: 143000000,
-      image: "/images/products/ElonMusk/product-51.webp"
-    },
-    {
-      id: 39,
-      name: "Luxury Yacht",
-      price: 150000000,
-      image: "/images/products/ElonMusk/product-52.webp"
-    },
-    {
-      id: 19,
-      name: "C17",
-      price: 340000000,
-      image: "/images/products/ElonMusk/product-53.webp"
-    },
-    {
-      id: 47,
-      name: "Mona Lisa",
-      price: 1000000000,
+      id: 65,
+      name: "F35",
+      price: 100000000,
       image: "/images/products/ElonMusk/product-54.webp"
     },
     {
-      id: 22,
-      name: "Cruise Ship",
-      price: 2000000000,
-      image: "/images/products/ElonMusk/product-55.webp"
+      id: 64,
+      name: "F22",
+      price: 143000000,
+      image: "/images/products/ElonMusk/product-53.webp"
     },
     {
-      id: 52,
-      name: "nuclear submarines",
-      price: 3500000000,
-      image: "/images/products/ElonMusk/product-56.webp"
+      id: 63,
+      name: "USS Gerald R. Ford",
+      price: 12800000000,
+      image: "/images/products/ElonMusk/product-52.webp"
     },
-    {
-      id: 46,
-      name: "MLB Team",
-      price: 8200000000,
-      image: "/images/products/ElonMusk/product-57.webp"
-    },
-    {
-      id: 48,
-      name: "NBA Team",
-      price: 8800000000,
-      image: "/images/products/ElonMusk/product-58.webp"
-    },
-    {
-      id: 49,
-      name: "NFL Team",
-      price: 10100000000,
-      image: "/images/products/ElonMusk/product-59.webp"
-    },
-    {
-      id: 10,
-      name: "aircraft carrier",
-      price: 13000000000,
-      image: "/images/products/ElonMusk/product-60.webp"
-    },
+
+
 
   ],
 

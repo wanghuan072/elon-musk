@@ -122,17 +122,6 @@
           role="listitem"
         />
       </div>
-      <!-- 加载更多触发点 -->
-      <div ref="loadMoreTrigger" class="load-more-trigger" v-if="hasMoreProducts">
-        <div class="loading-spinner" v-if="isLoadingMore">
-          <span class="spinner"></span>
-          <span>Loading more items...</span>
-        </div>
-      </div>
-      <!-- 已加载所有商品提示 -->
-      <div class="all-loaded" v-if="!hasMoreProducts && visibleProducts.length > 0">
-        <p>All {{ gameStore.currentProducts.length }} items loaded</p>
-      </div>
     </section>
 
     <!-- 收据区域 -->
@@ -181,7 +170,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, onUnmounted, watch, nextTick, computed } from 'vue'
+import { onMounted, ref, onUnmounted, nextTick, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useGameStore } from '../stores/gameStore'
 import Header from '../components/Header.vue'
@@ -190,66 +179,13 @@ import ReceiptTable from '../components/ReceiptTable.vue'
 import HotGames from '../components/HotGames.vue'
 import Footer from '../components/Footer.vue'
 import MoneyExhaustedModal from '../components/MoneyExhaustedModal.vue'
-import { useLazyElement } from '../utils/useLazyLoad.js'
-
-import { useDeviceDetection } from '@/utils/useDeviceDetection.js'
-
-const { isMobile } = useDeviceDetection()
 
 const route = useRoute()
 const gameStore = useGameStore()
 const isScrolled = ref(false)
 
-// 商品列表分页/懒加载
-const itemsPerPage = computed(() => (isMobile.value ? 12 : 24)) // 移动端12个，桌面端24个
-const visibleCount = ref(itemsPerPage.value)
-const isLoadingMore = ref(false)
-const loadMoreTrigger = ref(null)
-
-// 计算可见的商品
-const visibleProducts = computed(() => {
-  return gameStore.currentProducts.slice(0, visibleCount.value)
-})
-
-// 是否还有更多商品
-const hasMoreProducts = computed(() => {
-  return visibleCount.value < gameStore.currentProducts.length
-})
-
-// 加载更多商品
-const loadMore = () => {
-  if (isLoadingMore.value || !hasMoreProducts.value) return
-
-  isLoadingMore.value = true
-
-  // 使用 requestAnimationFrame 优化加载体验
-  requestAnimationFrame(() => {
-    setTimeout(() => {
-      visibleCount.value = Math.min(
-        visibleCount.value + itemsPerPage.value,
-        gameStore.currentProducts.length
-      )
-      isLoadingMore.value = false
-    }, 100) // 小延迟让用户看到加载状态
-  })
-}
-
-// 监听加载更多触发点
-const { isVisible: isTriggerVisible, observe: observeTrigger } = useLazyElement('200px')
-
-watch(isTriggerVisible, (visible) => {
-  if (visible && hasMoreProducts.value && !isLoadingMore.value) {
-    loadMore()
-  }
-})
-
-// 监听角色变化，重置可见数量
-watch(
-  () => gameStore.currentCharacter,
-  () => {
-    visibleCount.value = itemsPerPage.value
-  }
-)
+// 直接显示全部商品
+const visibleProducts = computed(() => gameStore.currentProducts)
 
 // 从store获取状态和方法
 const { toggleReceipt, resetGame } = gameStore
@@ -306,12 +242,6 @@ onMounted(async () => {
   await nextTick()
 
   window.addEventListener('scroll', handleScroll)
-
-  // 等待 DOM 更新后开始观察加载更多触发点
-  await nextTick()
-  if (loadMoreTrigger.value) {
-    observeTrigger(loadMoreTrigger.value)
-  }
 })
 
 // 组件卸载时移除滚动监听
