@@ -343,7 +343,6 @@ onUnmounted(() => {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-transform: uppercase;
   letter-spacing: 2px;
   line-height: 1.1;
 }

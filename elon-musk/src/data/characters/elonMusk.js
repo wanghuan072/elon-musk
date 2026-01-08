@@ -9,7 +9,7 @@ export const elonMuskData = {
   name: 'Elon Musk',
 
   // 游戏的主标题，显示在页面顶部
-  title: 'Spend Elon Musk Money',
+  title: "Spend Elon Musk's Money",
 
   // 游戏的副标题，用于描述游戏主题
   subtitle: 'The ultimate deep-pocket simulator. From SpaceX fleets to luxury estates, try to make a dent in Elon\'s massive $401 billion fortune.',

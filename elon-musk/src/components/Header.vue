@@ -5,7 +5,7 @@
       <div class="logo-section">
         <a href="#" class="logo" aria-label="Spend Money Game Home">
           <img src="/images/logo.webp" alt="Spend Money Game Logo" class="logo-image" />
-          <span class="logo-text">Spend Elon Musk Money</span>
+          <span class="logo-text">Spend Elon Musk's Money</span>
         </a>
       </div>
 
