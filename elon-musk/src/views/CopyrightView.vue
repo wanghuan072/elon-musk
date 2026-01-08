@@ -1,0 +1,304 @@
+<template>
+  <main class="copyright-view" role="main">
+    <!-- 头部组件 -->
+    <Header />
+
+    <!-- 页面头部 -->
+    <section class="page-header" aria-labelledby="page-title">
+      <div class="header-content">
+        <h1 id="page-title" class="page-title">Copyright</h1>
+        <p class="page-subtitle">Intellectual property rights</p>
+      </div>
+    </section>
+
+    <!-- 版权信息内容 -->
+    <section class="copyright-section">
+      <div class="container">
+        <div class="copyright-content">
+          <h2>Copyright Statement</h2>
+          <p>
+            All content on <strong>["spendmusksmoney.org"]</strong>, including but not limited to
+            text, graphics, images, videos, and software, is the property of
+            <strong>["spendmusksmoney.org"]</strong> and is protected by international copyright
+            laws. Unauthorized use, reproduction, or distribution of this content is strictly
+            prohibited.
+          </p>
+
+          <h2>What We Own</h2>
+          <ul>
+            <li>
+              <strong>Original Content:</strong> All written content, guides, tutorials, and reviews
+              created by our team.
+            </li>
+            <li>
+              <strong>Website Design:</strong> Layout, styling, user interface, and overall website
+              design elements.
+            </li>
+            <li>
+              <strong>Original Images:</strong> Photographs, screenshots, and graphics created
+              specifically for this website.
+            </li>
+            <li>
+              <strong>Code &amp; Software:</strong> Website code, scripts, and software developed
+              for this platform.
+            </li>
+          </ul>
+
+          <h2>Third-Party Content</h2>
+          <p>
+            We respect the intellectual property rights of others. Some content on our website may
+            include references, images, or information related to
+            <strong>["spendmusksmoney.org"]</strong>, which belongs to their respective owners.
+          </p>
+
+          <h2>Fair Use Policy</h2>
+          <p>
+            We support fair use of our content for educational, research, and personal purposes.
+            However, commercial use requires explicit permission.
+          </p>
+          <p><strong>Allowed Uses:</strong></p>
+          <ul>
+            <li>Personal study and research</li>
+            <li>Educational purposes</li>
+            <li>Non-commercial sharing</li>
+            <li>Criticism and commentary</li>
+          </ul>
+          <p><strong>Restricted Uses:</strong></p>
+          <ul>
+            <li>Commercial reproduction</li>
+            <li>Mass distribution</li>
+            <li>Modification without permission</li>
+            <li>Removal of attribution</li>
+          </ul>
+
+          <h2>DMCA Compliance</h2>
+          <p>
+            We comply with the Digital Millennium Copyright Act (DMCA). If you believe your
+            copyrighted work has been used without permission, please contact us immediately.
+          </p>
+          <p><strong>To file a DMCA takedown notice, please include:</strong></p>
+          <ul>
+            <li>Specific details about the copyrighted material</li>
+            <li>Proof that you own the rights to the content</li>
+            <li>A formal DMCA takedown notice sent to our designated agent</li>
+          </ul>
+
+          <h2>Attribution Requirements</h2>
+          <p>
+            When using our content under fair use or with permission, proper attribution is
+            required.
+          </p>
+
+          <h2>License Requests</h2>
+          <p>
+            For commercial use, licensing, or other permissions, please contact us with your
+            specific request.
+          </p>
+          <p><strong>Your request should include:</strong></p>
+          <ul>
+            <li>Specific content you want to use</li>
+            <li>Intended purpose and audience</li>
+            <li>Duration of use</li>
+            <li>Contact information</li>
+          </ul>
+
+          <h2>Contact Information</h2>
+          <p>Email: <a href="mailto:wyong@spendmusksmoney.org">wyong@spendmusksmoney.org</a></p>
+
+          <h2>Updates to Copyright Notice</h2>
+          <p>
+            This copyright notice may be updated periodically. The most recent version will always
+            be available on this page. Continued use of our website constitutes acceptance of any
+            changes.
+          </p>
+          <p>Check this page regularly for updates to our copyright policy.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 底部Footer -->
+    <Footer />
+  </main>
+</template>
+
+<script setup>
+import Header from '../components/Header.vue'
+import Footer from '../components/Footer.vue'
+</script>
+
+<style scoped>
+.copyright-view {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.page-header {
+  padding: 60px 24px 40px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.header-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: 48px;
+  font-weight: 900;
+  margin: 0 0 16px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-subtitle {
+  font-size: 18px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.copyright-content {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 50px;
+  max-width: 900px;
+  margin: 0 auto 40px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.copyright-content section {
+  margin-bottom: 20px;
+}
+
+.copyright-content section:last-child {
+  margin-bottom: 0;
+}
+
+.copyright-content h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #1f2937;
+  position: relative;
+  padding-left: 15px;
+  line-height: 1.5;
+}
+
+.copyright-content h2:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 30px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 2px;
+}
+
+.copyright-content p {
+  font-size: 14px;
+  color: #4b5563;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.copyright-content ul {
+  margin-bottom: 20px;
+  padding-left: 0;
+}
+
+.copyright-content li {
+  list-style: none;
+  position: relative;
+  padding: 10px 0 10px 20px;
+  color: #4b5563;
+  font-size: 16px;
+  line-height: 1.5;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.copyright-content li:before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  color: #667eea;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.copyright-content strong {
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.copyright-content a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.copyright-content a:hover {
+  color: #764ba2;
+  border-bottom-color: #764ba2;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .page-header {
+    padding: 20px 10px 20px;
+  }
+
+  .page-title {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+
+  .page-subtitle {
+    font-size: 16px;
+  }
+
+  .copyright-content {
+    padding: 10px;
+    border-radius: 16px;
+  }
+
+  .copyright-content h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .copyright-content ul {
+    margin-bottom: 10px;
+  }
+
+  .copyright-content p,
+  .copyright-content li {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .copyright-content li {
+    padding: 5px 0 5px 10px;
+  }
+
+  .copyright-content p {
+    margin-bottom: 10px;
+  }
+}
+</style>
