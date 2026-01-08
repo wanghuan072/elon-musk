@@ -10,6 +10,7 @@
     </section>
 
     <section class="content" aria-label="Blog list">
+      <h2 class="section-title">All Guides</h2>
       <div class="grid" role="list">
         <article v-for="post in posts" :key="post.slug" class="card" role="listitem">
           <a class="card-link" :href="`/blog/${post.slug}`" aria-label="Read post">
@@ -19,7 +20,7 @@
             </div>
 
             <div class="card-body">
-              <div class="title">{{ post.title }}</div>
+              <h3 class="title">{{ post.title }}</h3>
               <p class="excerpt" v-if="post.excerpt">{{ post.excerpt }}</p>
 
               <div class="pill-row" v-if="post.tags?.length">
@@ -110,6 +111,13 @@ const posts = computed(() =>
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px 48px;
+}
+
+.section-title {
+  margin: 0 0 14px;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -0.2px;
 }
 
 .grid {
