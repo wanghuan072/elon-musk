@@ -262,7 +262,6 @@ const closeMenu = () => {
   border-radius: 10px;
   font-weight: 600;
   font-size: 14px;
-  text-transform: uppercase;
   letter-spacing: 0.5px;
   position: relative;
   overflow: hidden;
