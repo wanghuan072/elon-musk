@@ -111,8 +111,6 @@ export const blogs = [
                 <li><strong>R&D:</strong> A massive portion of available resources is poured back into research for sustainable energy and rocketry.</li>
             </ul>
 
-            <img src="/images/products/ElonMusk/product-01.webp" alt="Tesla Model S - One of Elon Musk's flagship products" style="max-width: 100%; height: auto; border-radius: 12px; margin: 20px 0;" />
-
             <h2>Conclusion</h2>
             <p>
                 Elon Musk's net worth in 2025 is a testament to the modern valuation of technology and future potential. It is a number driven by investor belief in a multi-planetary future and an AI-driven economy. While he may not have billions in a checking account to spend on impulse buys, the power his capital wields shapes the future of humanity.
@@ -388,8 +386,6 @@ export const blogs = [
             <p>
                 Today, reports suggest he primarily stays in a modest <strong>Casita</strong>, a foldable prefabricated home by Boxabl worth roughly $50,000, located at the SpaceX launch site in Boca Chica, Texas.
             </p>
-
-            <img src="/images/products/ElonMusk/product-08.webp" alt="Luxury car collection - similar to what billionaires own" style="max-width: 100%; height: auto; border-radius: 12px; margin: 20px 0;" />
 
             <h2>Conclusion</h2>
             <p>
