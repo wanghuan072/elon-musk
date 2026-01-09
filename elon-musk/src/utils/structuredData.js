@@ -4,10 +4,10 @@
 
 // 网站基础信息
 const siteInfo = {
-  name: 'Spend Bill Gates Money',
+  name: 'Spend Elon Musk Money',
   url: 'https://spendmusksmoney.org',
   logo: '/images/logo.png',
-  description: 'Interactive wealth simulation game where you can experience spending Bill Gates\' fortune.',
+  description: 'Interactive wealth simulation game where you can experience spending Elon Musk\'s fortune.',
   sameAs: [
     'https://twitter.com/wealthgame',
     'https://facebook.com/wealthgame'
@@ -142,6 +142,11 @@ export function insertStructuredData(schema) {
  * @param {Array} schemas - 结构化数据数组
  */
 export function insertMultipleStructuredData(schemas) {
+  // 移除已存在的结构化数据
+  const existingScripts = document.querySelectorAll('script[type="application/ld+json"]')
+  existingScripts.forEach(script => script.remove())
+
+  // 创建并插入新的结构化数据脚本
   schemas.forEach(schema => {
     const script = document.createElement('script')
     script.type = 'application/ld+json'

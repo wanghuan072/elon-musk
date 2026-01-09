@@ -269,6 +269,18 @@ export const elonMuskData = {
       image: "/images/products/ElonMusk/product-38.webp"
     },
     {
+      id: 68,
+      name: "McLaren F1",
+      price: 1000000,
+      image: "/images/products/ElonMusk/product-56.webp"
+    },
+    {
+      id: 69,
+      name: '"Wet Nellie" Submarine Car',
+      price: 1000000,
+      image: "/images/products/ElonMusk/product-58.webp"
+    },
+    {
       id: 16,
       name: "Bugatti Chiron",
       price: 3800000,
@@ -335,6 +347,12 @@ export const elonMuskData = {
       image: "/images/products/ElonMusk/product-48.webp"
     },
     {
+      id: 66,
+      name: "Gulfstream G700",
+      price: 78000000,
+      image: "/images/products/ElonMusk/product-55.webp"
+    },
+    {
       id: 65,
       name: "F35",
       price: 100000000,
@@ -352,6 +370,16 @@ export const elonMuskData = {
       price: 12800000000,
       image: "/images/products/ElonMusk/product-52.webp"
     },
+    {
+      id: 67,
+      name: "X (Twitter)",
+      price: 44000000000,
+      image: "/images/products/ElonMusk/product-57.webp"
+    },
+
+   
+   
+    
 
 
 

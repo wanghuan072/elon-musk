@@ -19,8 +19,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['vue', 'vue-router', 'pinia'],
-          utils: ['@/utils/seo.js', '@/utils/structuredData.js']
+          vendor: ['vue', 'vue-router', 'pinia']
         }
       }
     },
