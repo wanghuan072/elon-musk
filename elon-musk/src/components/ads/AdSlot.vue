@@ -1,9 +1,5 @@
 <template>
-  <aside
-    class="container"
-    aria-label="Advertisement"
-    :style="slotStyle"
-  >
+  <aside class="container" aria-label="Advertisement" :style="slotStyle">
     <div ref="adContainer"></div>
   </aside>
 </template>

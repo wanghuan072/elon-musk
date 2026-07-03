@@ -3,12 +3,11 @@ const BANNER_INVOKE_URL = `https://www.highperformanceformat.com/${BANNER_KEY}/i
 const NATIVE_INVOKE_URL =
   'https://pl30178224.effectivecpmnetwork.com/0a998aed9549b428589f6b73e669343d/invoke.js'
 const NATIVE_CONTAINER_ID = 'container-0a998aed9549b428589f6b73e669343d'
-const POPUNDER_URL =
-  'https://pl30178223.effectivecpmnetwork.com/81/84/76/81847652f01613b08da06d86629a2489.js'
 
 const MOBILE_BREAKPOINT = 768
 
-let popunderLoaded = false
+let bannerQueue = Promise.resolve()
+let nativeLoadCounter = 0
 
 export function isMobileViewport() {
   return window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches
@@ -20,74 +19,46 @@ export function getBannerSize() {
     : { width: 728, height: 90 }
 }
 
-export function loadPopunder() {
-  if (popunderLoaded) return
-  popunderLoaded = true
+function hijackDocumentWrite(container) {
+  const originalWrite = document.write.bind(document)
+  const originalWriteln = document.writeln.bind(document)
 
-  const script = document.createElement('script')
-  script.src = POPUNDER_URL
-  document.body.appendChild(script)
-}
-
-function createAdIframe(container, width, height) {
-  const iframe = document.createElement('iframe')
-  iframe.title = 'Advertisement'
-  iframe.setAttribute('frameborder', '0')
-  iframe.setAttribute('scrolling', 'no')
-  iframe.style.border = '0'
-  iframe.style.overflow = 'hidden'
-  iframe.style.display = 'block'
-  iframe.style.maxWidth = '100%'
-
-  if (width === '100%') {
-    iframe.style.width = '100%'
-    iframe.style.height = `${height}px`
-    iframe.style.minHeight = `${height}px`
-  } else {
-    iframe.width = String(width)
-    iframe.height = String(height)
-    iframe.style.width = `${width}px`
-    iframe.style.height = `${height}px`
+  document.write = document.writeln = (html) => {
+    container.insertAdjacentHTML('beforeend', html)
   }
 
-  container.appendChild(iframe)
-  return iframe
+  return () => {
+    document.write = originalWrite
+    document.writeln = originalWriteln
+  }
 }
 
-function writeIframeHtml(iframe, html) {
-  const doc = iframe.contentWindow?.document
-  if (!doc) return
-
-  doc.open()
-  doc.write(html)
-  doc.close()
-}
-
-/** Native Banner - 使用联盟提供的原始代码结构 */
+/**
+ * Native Banner - 联盟原始代码，主页面直接加载（Referer = spendmusksmoney.org）
+ */
 export function loadNativeBanner(container) {
   if (!container) return
 
   container.innerHTML = ''
+  nativeLoadCounter += 1
 
-  const iframe = createAdIframe(container, '100%', 280)
-  writeIframeHtml(
-    iframe,
-    `<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"></head>
-<body style="margin:0;padding:0;text-align:center;">
-<script async="async" data-cfasync="false" src="${NATIVE_INVOKE_URL}"><\/script>
-<div id="${NATIVE_CONTAINER_ID}"></div>
-</body>
-</html>`
-  )
+  const script = document.createElement('script')
+  script.async = true
+  script.setAttribute('data-cfasync', 'false')
+  script.src = `${NATIVE_INVOKE_URL}?cb=${nativeLoadCounter}`
+
+  const adDiv = document.createElement('div')
+  adDiv.id = NATIVE_CONTAINER_ID
+
+  container.appendChild(script)
+  container.appendChild(adDiv)
 }
 
-/** Banner 728x90 / 300x250 - 使用联盟提供的原始 atOptions 代码 */
+/**
+ * Banner - 联盟原始 atOptions + invoke.js
+ */
 export function loadBannerAd(container) {
-  if (!container) return
-
-  container.innerHTML = ''
+  if (!container) return Promise.resolve()
 
   const { width, height } = getBannerSize()
   const options = {
@@ -98,18 +69,32 @@ export function loadBannerAd(container) {
     params: {},
   }
 
-  const iframe = createAdIframe(container, width, height)
-  writeIframeHtml(
-    iframe,
-    `<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"></head>
-<body style="margin:0;padding:0;overflow:hidden;">
-<script type="text/javascript">
-  atOptions = ${JSON.stringify(options)};
-<\/script>
-<script type="text/javascript" src="${BANNER_INVOKE_URL}"><\/script>
-</body>
-</html>`
+  bannerQueue = bannerQueue.then(
+    () =>
+      new Promise((resolve) => {
+        container.innerHTML = ''
+
+        const optionsScript = document.createElement('script')
+        optionsScript.type = 'text/javascript'
+        optionsScript.text = `atOptions = ${JSON.stringify(options)};`
+        container.appendChild(optionsScript)
+
+        const restore = hijackDocumentWrite(container)
+
+        const invokeScript = document.createElement('script')
+        invokeScript.type = 'text/javascript'
+        invokeScript.src = BANNER_INVOKE_URL
+        invokeScript.onload = () => {
+          restore()
+          resolve()
+        }
+        invokeScript.onerror = () => {
+          restore()
+          resolve()
+        }
+        container.appendChild(invokeScript)
+      })
   )
+
+  return bannerQueue
 }
