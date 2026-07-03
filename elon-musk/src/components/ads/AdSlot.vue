@@ -6,7 +6,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
-import { loadNativeBanner, loadBannerAd } from '../../utils/adLoader.js'
+import { loadNativeBanner, loadBannerAd, cleanupNativeBanner } from '../../utils/adLoader.js'
 
 const props = defineProps({
   type: {
@@ -30,6 +30,9 @@ onMounted(async () => {
 })
 
 onUnmounted(() => {
+  if (props.type === 'native') {
+    cleanupNativeBanner()
+  }
   if (adContainer.value) {
     adContainer.value.innerHTML = ''
   }
