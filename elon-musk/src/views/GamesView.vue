@@ -11,6 +11,8 @@
       </div>
     </section>
 
+    <AdSlot type="native" />
+
     <!-- 游戏列表 -->
     <section class="games-section" aria-labelledby="games-title">
       <div class="games-container">
@@ -29,6 +31,8 @@
       </div>
     </section>
 
+    <AdSlot type="banner" />
+
     <!-- 底部Footer -->
     <Footer />
   </main>
@@ -39,6 +43,7 @@ import Header from '../components/Header.vue'
 import GameCard from '../components/GameCard.vue'
 import Footer from '../components/Footer.vue'
 import { games } from '../data/games.js'
+import AdSlot from '../components/ads/AdSlot.vue'
 
 // 获取所有游戏
 const gamesList = games

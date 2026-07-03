@@ -9,6 +9,8 @@
 
     <div v-else class="layout">
       <section class="main">
+        <AdSlot type="native" />
+    
         <nav class="crumb" aria-label="Breadcrumb">
           <a class="crumb-link" href="/blog">Guides</a>
           <span class="crumb-sep">›</span>
@@ -23,10 +25,14 @@
           <span v-if="post.tags?.length" class="tags">{{ (post.tags || []).join(', ') }}</span>
         </div>
 
+        <AdSlot type="banner" />
+
         <div class="content-panel">
           <p class="excerpt" v-if="post.excerpt">{{ post.excerpt }}</p>
           <article class="v-html-content" v-html="post.detailsHtml"></article>
         </div>
+
+        <AdSlot type="banner" />
       </section>
 
       <aside class="sidebar" aria-label="Post info">
@@ -61,6 +67,7 @@ import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
 import { blogs } from '../data/blogs.js'
 import { setPageSEO } from '../utils/seo.js'
+import AdSlot from '../components/ads/AdSlot.vue'
 
 const route = useRoute()
 

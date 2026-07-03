@@ -23,6 +23,8 @@
       </div>
     </section>
 
+    <AdSlot type="native" />
+
     <!-- 余额显示区域 -->
     <section
       class="balance-section"
@@ -104,6 +106,8 @@
       </div>
     </section>
 
+    <AdSlot type="banner" />
+
     <!-- 商品列表区域 -->
     <section
       class="products-section"
@@ -124,6 +128,8 @@
       </div>
     </section>
 
+    <AdSlot type="banner" />
+
     <!-- 收据区域 -->
     <section
       class="receipt-section"
@@ -137,6 +143,7 @@
         <ReceiptTable :show-receipt="gameStore.showReceipt" @close="closeReceipt" />
       </div>
     </section>
+    
 
     <!-- 角色详细信息 -->
     <section
@@ -148,8 +155,12 @@
       </div>
     </section>
 
+    <AdSlot type="banner" />
+
     <!-- 热门游戏区域 -->
     <HotGames @select="navigateToGame" />
+
+    <AdSlot type="banner" />
 
     <!-- 钱花完弹窗 -->
     <MoneyExhaustedModal
@@ -179,6 +190,7 @@ import ReceiptTable from '../components/ReceiptTable.vue'
 import HotGames from '../components/HotGames.vue'
 import Footer from '../components/Footer.vue'
 import MoneyExhaustedModal from '../components/MoneyExhaustedModal.vue'
+import AdSlot from '../components/ads/AdSlot.vue'
 
 const route = useRoute()
 const gameStore = useGameStore()

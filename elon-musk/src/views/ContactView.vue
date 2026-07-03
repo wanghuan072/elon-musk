@@ -11,6 +11,8 @@
       </div>
     </section>
 
+    <AdSlot type="native" />
+
     <!-- 联系信息 -->
     <section class="contact-section">
       <div class="container">
@@ -104,6 +106,8 @@
       </div>
     </section>
 
+    <AdSlot type="banner" />
+
     <!-- 底部Footer -->
     <Footer />
   </main>
@@ -112,6 +116,7 @@
 <script setup>
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
+import AdSlot from '../components/ads/AdSlot.vue'
 </script>
 
 <style scoped>

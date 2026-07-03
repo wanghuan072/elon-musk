@@ -11,6 +11,8 @@
       </div>
     </section>
 
+    <AdSlot type="native" />
+
     <!-- 版权信息内容 -->
     <section class="copyright-section">
       <div class="container">
@@ -116,6 +118,8 @@
       </div>
     </section>
 
+    <AdSlot type="banner" />
+
     <!-- 底部Footer -->
     <Footer />
   </main>
@@ -124,6 +128,7 @@
 <script setup>
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
+import AdSlot from '../components/ads/AdSlot.vue'
 </script>
 
 <style scoped>

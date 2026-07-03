@@ -9,6 +9,8 @@
       </div>
     </section>
 
+    <AdSlot type="native" />
+
     <section class="content" aria-label="Blog list">
       <h2 class="section-title">All Guides</h2>
       <div class="grid" role="list">
@@ -39,6 +41,7 @@
       <div v-if="posts.length === 0" class="empty">No posts found.</div>
     </section>
 
+    <AdSlot type="banner" />
     <Footer />
   </main>
 </template>
@@ -48,6 +51,7 @@ import { computed } from 'vue'
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
 import { blogs } from '../data/blogs.js'
+import AdSlot from '../components/ads/AdSlot.vue'
 
 const posts = computed(() =>
   blogs.slice().sort((a, b) => (b.publishDate || '').localeCompare(a.publishDate || ''))

@@ -16,6 +16,9 @@
     <div v-else class="layout">
       <!-- 左列：主内容 -->
       <section class="main" :class="{ 'page-fullscreen': isPageFullscreen }">
+        
+        <AdSlot type="native" />
+
         <div class="player">
           <!-- 预览蒙版（点击后显示 iframe） -->
           <div v-if="!showGameplay" class="preview" @click="toggleGameplay">
@@ -96,8 +99,12 @@
           </div>
         </div>
 
+        <AdSlot type="banner" />
+
         <!-- About 内容（v-html 渲染） -->
         <article class="v-html-content" v-html="game.detailsHtml"></article>
+
+        <AdSlot type="banner" />
       </section>
 
       <!-- 右列：评分/评论 -->
@@ -128,6 +135,7 @@ import Footer from '../components/Footer.vue'
 import { games } from '../data/games.js'
 import { setGameDetailPageSEO } from '../utils/seo.js'
 import { insertStructuredData, generateGameSchema } from '../utils/structuredData.js'
+import AdSlot from '../components/ads/AdSlot.vue'
 
 const route = useRoute()
 

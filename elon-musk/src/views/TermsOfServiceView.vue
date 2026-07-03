@@ -11,6 +11,8 @@
       </div>
     </section>
 
+    <AdSlot type="native" />
+
     <!-- 服务条款内容 -->
     <div class="container">
       <div class="terms-section">
@@ -213,6 +215,8 @@
       </div>
     </div>
 
+    <AdSlot type="banner" />
+
     <!-- 底部Footer -->
     <Footer />
   </main>
@@ -221,6 +225,7 @@
 <script setup>
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
+import AdSlot from '../components/ads/AdSlot.vue'
 </script>
 
 <style scoped>
