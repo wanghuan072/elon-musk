@@ -9,11 +9,15 @@ const POPUNDER_URL =
 const MOBILE_BREAKPOINT = 768
 
 let popunderLoaded = false
-let bannerQueue = Promise.resolve()
-let nativeLoadId = 0
 
 export function isMobileViewport() {
   return window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches
+}
+
+export function getBannerSize() {
+  return isMobileViewport()
+    ? { width: 300, height: 250 }
+    : { width: 728, height: 90 }
 }
 
 export function loadPopunder() {
@@ -25,74 +29,87 @@ export function loadPopunder() {
   document.body.appendChild(script)
 }
 
-/** 劫持 document.write，使动态加载的联盟脚本能在 SPA 中正常渲染 */
-function hijackDocumentWrite(container) {
-  const originalWrite = document.write.bind(document)
-  const originalWriteln = document.writeln.bind(document)
+function createAdIframe(container, width, height) {
+  const iframe = document.createElement('iframe')
+  iframe.title = 'Advertisement'
+  iframe.setAttribute('frameborder', '0')
+  iframe.setAttribute('scrolling', 'no')
+  iframe.style.border = '0'
+  iframe.style.overflow = 'hidden'
+  iframe.style.display = 'block'
+  iframe.style.maxWidth = '100%'
 
-  document.write = document.writeln = (html) => {
-    container.insertAdjacentHTML('beforeend', html)
+  if (width === '100%') {
+    iframe.style.width = '100%'
+    iframe.style.height = `${height}px`
+    iframe.style.minHeight = `${height}px`
+  } else {
+    iframe.width = String(width)
+    iframe.height = String(height)
+    iframe.style.width = `${width}px`
+    iframe.style.height = `${height}px`
   }
 
-  return () => {
-    document.write = originalWrite
-    document.writeln = originalWriteln
-  }
+  container.appendChild(iframe)
+  return iframe
 }
 
+function writeIframeHtml(iframe, html) {
+  const doc = iframe.contentWindow?.document
+  if (!doc) return
+
+  doc.open()
+  doc.write(html)
+  doc.close()
+}
+
+/** Native Banner - 使用联盟提供的原始代码结构 */
 export function loadNativeBanner(container) {
   if (!container) return
 
   container.innerHTML = ''
-  nativeLoadId += 1
 
-  const adDiv = document.createElement('div')
-  adDiv.id = NATIVE_CONTAINER_ID
-  container.appendChild(adDiv)
-
-  const script = document.createElement('script')
-  script.async = true
-  script.setAttribute('data-cfasync', 'false')
-  script.src = `${NATIVE_INVOKE_URL}?cb=${nativeLoadId}`
-  document.body.appendChild(script)
-}
-
-export function loadBannerAd(container) {
-  if (!container) return Promise.resolve()
-
-  const options = isMobileViewport()
-    ? { key: BANNER_KEY, format: 'iframe', height: 250, width: 300, params: {} }
-    : { key: BANNER_KEY, format: 'iframe', height: 90, width: 728, params: {} }
-
-  bannerQueue = bannerQueue.then(
-    () =>
-      new Promise((resolve) => {
-        container.innerHTML = ''
-        window.atOptions = options
-
-        const restore = hijackDocumentWrite(container)
-
-        const script = document.createElement('script')
-        script.type = 'text/javascript'
-        script.src = BANNER_INVOKE_URL
-        script.onload = () => {
-          restore()
-          resolve()
-        }
-        script.onerror = () => {
-          restore()
-          resolve()
-        }
-        document.body.appendChild(script)
-      })
+  const iframe = createAdIframe(container, '100%', 280)
+  writeIframeHtml(
+    iframe,
+    `<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;text-align:center;">
+<script async="async" data-cfasync="false" src="${NATIVE_INVOKE_URL}"><\/script>
+<div id="${NATIVE_CONTAINER_ID}"></div>
+</body>
+</html>`
   )
-
-  return bannerQueue
 }
 
-export function cleanupNativeBanner() {
-  const existing = document.getElementById(NATIVE_CONTAINER_ID)
-  if (existing) {
-    existing.remove()
+/** Banner 728x90 / 300x250 - 使用联盟提供的原始 atOptions 代码 */
+export function loadBannerAd(container) {
+  if (!container) return
+
+  container.innerHTML = ''
+
+  const { width, height } = getBannerSize()
+  const options = {
+    key: BANNER_KEY,
+    format: 'iframe',
+    height,
+    width,
+    params: {},
   }
+
+  const iframe = createAdIframe(container, width, height)
+  writeIframeHtml(
+    iframe,
+    `<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;overflow:hidden;">
+<script type="text/javascript">
+  atOptions = ${JSON.stringify(options)};
+<\/script>
+<script type="text/javascript" src="${BANNER_INVOKE_URL}"><\/script>
+</body>
+</html>`
+  )
 }

@@ -1,12 +1,16 @@
 <template>
-  <aside class="container" style="display: flex; justify-content: center; align-items: center">
+  <aside
+    class="container"
+    aria-label="Advertisement"
+    :style="slotStyle"
+  >
     <div ref="adContainer"></div>
   </aside>
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
-import { loadNativeBanner, loadBannerAd, cleanupNativeBanner } from '../../utils/adLoader.js'
+import { loadNativeBanner, loadBannerAd, getBannerSize } from '../../utils/adLoader.js'
 
 const props = defineProps({
   type: {
@@ -17,9 +21,25 @@ const props = defineProps({
 })
 
 const adContainer = ref(null)
+const slotStyle = ref(
+  'display: flex; justify-content: center; align-items: center; width: 100%; min-height: 90px;'
+)
+
+function updateSlotStyle() {
+  if (props.type === 'native') {
+    slotStyle.value =
+      'display: flex; justify-content: center; align-items: center; width: 100%; min-height: 280px;'
+    return
+  }
+
+  const { height } = getBannerSize()
+  slotStyle.value = `display: flex; justify-content: center; align-items: center; width: 100%; min-height: ${height}px;`
+}
 
 onMounted(async () => {
+  updateSlotStyle()
   await nextTick()
+
   if (!adContainer.value) return
 
   if (props.type === 'native') {
@@ -30,9 +50,6 @@ onMounted(async () => {
 })
 
 onUnmounted(() => {
-  if (props.type === 'native') {
-    cleanupNativeBanner()
-  }
   if (adContainer.value) {
     adContainer.value.innerHTML = ''
   }
